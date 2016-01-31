@@ -1,0 +1,34 @@
+---
+layout: default
+title: Article
+---
+
+<div class="container">
+
+    <div class="article-main">
+
+        <ul class="article-list">
+            {% for post in site.posts %}
+            <li>
+                <span class="date"><i>{{ post.date | date: "%b %-d, %Y" }}</i></span>
+                <div class="article-content">
+                    <h2 class="article-title">
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                    </h2>
+                    <div class="article-export">
+                        {% if post.content contains "<!-- more -->" %}
+                        {{ post.content | split:"<!-- more -->" | first }}
+                        {% else %}
+                        {{ post.content | strip_html | truncatewords:100 }}
+                        {% endif %}
+                    </div>
+                </div>
+                <!--<span class="category">{{ post.category }}</span>-->
+                <div class="clear"></div>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</div>
